@@ -12,6 +12,8 @@ class CalculadoraFatorial
      * @return int Resultado do fatorial
      * @throws InvalidArgumentException Se o número for negativo
      */
+
+     #Calculo Fatorial com Invalid Número Negativo
     public function calcular(int $numero): int
     {
         if ($numero < 0) {

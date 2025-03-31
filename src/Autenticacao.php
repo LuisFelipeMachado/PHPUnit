@@ -12,7 +12,7 @@ class Autenticacao
         #Verifica se o email já está registrado
         foreach ($this->usuarios as $usuario) {
             if ($usuario['email'] === $email) {
-                return false; // Retorna falso caso o email já exista
+                return false; 
             }
         }
 
@@ -20,10 +20,11 @@ class Autenticacao
         $this->usuarios[] = [
             'nome' => $nome,
             'email' => $email,
-            'senha' => password_hash($senha, PASSWORD_BCRYPT) // Senha criptografada
+            'senha' => password_hash($senha, PASSWORD_BCRYPT) #Simulador com proteção auth
+
         ];
 
-        return true; // Usuário registrado com sucesso
+        return true; 
     }
 
     #Função para fazer login
@@ -32,13 +33,13 @@ class Autenticacao
         foreach ($this->usuarios as $usuario) {
             if ($usuario['email'] === $email) {
                 if (password_verify($senha, $usuario['senha'])) {
-                    return true; #Login bem-sucedido
+                    return true; 
                 } else {
-                    return false; #Senha incorreta
+                    return false; 
                 }
             }
         }
 
-        return false; #Email não encontrado
+        return false; 
     }
 }

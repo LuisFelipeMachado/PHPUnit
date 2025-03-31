@@ -13,6 +13,7 @@ class ManipularDadosTest extends TestCase
         $this->manipularDados = new ManipularDados();
     }
 
+    #Dados Arquivos Teste
     public function testCriarArquivo()
     {
         $nomeArquivo = 'teste.txt';
@@ -27,7 +28,7 @@ class ManipularDadosTest extends TestCase
 
         unlink($nomeArquivo);
     }
-
+    
     public function testLerArquivo()
     {
         $nomeArquivo = 'teste.txt';

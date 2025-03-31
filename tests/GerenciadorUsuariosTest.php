@@ -9,87 +9,85 @@ class GerenciadorUsuariosTest extends TestCase
 {
     private GerenciadorUsuarios $gerenciador;
 
-    // Este método será executado antes de cada teste
+    #Este método será executado antes de cada teste
     protected function setUp(): void
     {
-        // Aqui você pode inicializar o Gerenciador e qualquer outra dependência
+        #pode inicializar o Gerenciador e qualquer outra dependência
         $this->gerenciador = new GerenciadorUsuarios();
     }
 
-    // Teste para cadastro de usuário
+    #Teste para cadastro de usuário
     public function testCadastraUsuarioComSucesso()
     {
-        // Tentando cadastrar um usuário
+        #Tentando cadastrar um usuário
         $resultado = $this->gerenciador->cadastrarUsuario(
             'João Silva',
             'joao.silva',
             'joao@exemplo.com'
         );
         
-        // Verifica se o cadastro foi bem-sucedido
+        #Verifica se o cadastro foi bem-sucedido
         $this->assertTrue($resultado);
     }
 
-    // Teste para evitar email duplicado
+    #Teste para evitar email duplicado
     public function testNaoPermiteEmailDuplicado()
     {
-        // Cadastra o primeiro usuário
+        #Cadastra o primeiro usuário
         $this->gerenciador->cadastrarUsuario('Maria', 'maria', 'maria@exemplo.com');
         
-        // Tenta cadastrar outro usuário com o mesmo email
         $resultado = $this->gerenciador->cadastrarUsuario('Maria 2', 'maria2', 'maria@exemplo.com');
         
-        // Verifica se a operação falhou ao tentar cadastrar email duplicado
+        # Verifica se a operação falhou ao tentar cadastrar email duplicado
         $this->assertFalse($resultado);
     }
 
-    // Teste de busca de usuário pelo email
+    #Teste de busca de usuário pelo email
     public function testBuscaUsuarioPorEmail()
     {
-        // Cadastra um usuário
+        #Cadastra um usuário
         $this->gerenciador->cadastrarUsuario('Carlos', 'carlos', 'carlos@exemplo.com');
         
-        // Busca o usuário por email
+        #Busca o usuário por email
         $usuario = $this->gerenciador->buscarPorEmail('carlos@exemplo.com');
         
-        // Verifica se o nome do usuário encontrado está correto
+        #Verifica se o nome do usuário encontrado está correto
         $this->assertEquals('Carlos', $usuario['nome_completo']);
     }
 
-    // Teste para remoção de usuário
+    #Teste para remoção de usuário
     public function testRemoveUsuario()
     {
-        // Cadastra um usuário
+        #Cadastra um usuário e remove por email
         $this->gerenciador->cadastrarUsuario('Teste', 'teste', 'teste@exemplo.com');
         
-        // Remove o usuário pelo email
         $resultado = $this->gerenciador->removerUsuario('teste@exemplo.com');
         
-        // Verifica se a remoção foi bem-sucedida
+        #Verifica se a remoção foi bem-sucedida e Busca 
         $this->assertTrue($resultado);
         
-        // Tenta buscar o usuário após a remoção
+        #Tenta buscar o usuário após a remoção
         $usuario = $this->gerenciador->buscarPorEmail('teste@exemplo.com');
         
-        // Verifica se o usuário foi realmente removido
+        #Verifica se o usuário foi realmente removido
         $this->assertNull($usuario);
     }
 
-    // Teste para garantir que ao cadastrar um usuário sem o nome ele retorne falso
+    #Teste para garantir que ao cadastrar um usuário sem o nome ele retorne falso
     public function testCadastroComNomeVazio()
     {
-        // Tenta cadastrar um usuário com nome vazio
+        #Tenta cadastrar um usuário com nome vazio
         $resultado = $this->gerenciador->cadastrarUsuario(
             '',
             'usuario',
             'usuario@exemplo.com'
         );
         
-        // Verifica se a operação falhou, pois o nome está vazio
+        #Verifica se a operação falhou, pois o nome está vazio
         $this->assertFalse($resultado);
     }
 
-    // Teste para garantir que não é possível cadastrar usuário com e-mail inválido
+    #Teste para garantir que não é possível cadastrar usuário com e-mail inválido
     public function testCadastroComEmailInvalido()
     {
         // Tenta cadastrar um usuário com email inválido
@@ -99,7 +97,7 @@ class GerenciadorUsuariosTest extends TestCase
             'invalid-email'
         );
         
-        // Verifica se a operação falhou, pois o email é inválido
+        #Verifica se a operação falhou, pois o email é inválido
         $this->assertFalse($resultado);
     }
 }
